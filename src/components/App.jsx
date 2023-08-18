@@ -24,8 +24,8 @@ export class App extends Component {
   }
 
   calcPositivePercentage = () => {
-    const { good, total } = this.state;
-    const total = countTotalFeedback();
+    const { good } = this.state;
+    const total = this.countTotalFeedback();
     return total === 0 ? 0 : Math.round((good / total) * 100);
   };
 
@@ -38,7 +38,7 @@ export class App extends Component {
           <FeedbackOptions clickFeedback={this.handleClick} options={options} />
         </Section>
         <Section title={'Statistics'}>
-          {this.state.total === 0 ? (
+          {this.countTotalFeedback() === 0 ? (
             <Notification messege={'There is no feedback'} />
           ) : (
             <Statistics
