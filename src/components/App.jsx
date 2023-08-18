@@ -9,20 +9,23 @@ export class App extends Component {
     good: 0,
     neutral: 0,
     bad: 0,
-    total: 0,
   };
 
   handleClick = key => {
     this.setState(prevState => {
       return {
         [key]: prevState[key] + 1,
-        total: prevState.total + 1,
       };
     });
   };
 
+  countTotalFeedback() {
+    return this.state.good + this.state.neutral + this.state.bad;
+  }
+
   calcPositivePercentage = () => {
     const { good, total } = this.state;
+    const total = countTotalFeedback();
     return total === 0 ? 0 : Math.round((good / total) * 100);
   };
 
@@ -42,7 +45,7 @@ export class App extends Component {
               good={good}
               neutral={neutral}
               bad={bad}
-              total={this.state.total}
+              total={this.countTotalFeedback()}
               positivePercentage={this.calcPositivePercentage()}
             />
           )}
